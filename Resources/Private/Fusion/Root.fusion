@@ -1,0 +1,50 @@
+prototype(Nebelfitz.MathTraining:ArtithmeticTaskGenerator) {
+    @class = 'Nebelfitz\\MathTraining\\FusionObjects\\ArtithmeticTaskGeneratorImplementation'
+    number = 80
+    elementaryArithmeticTypes = ${['addition']}
+    maximalOperand = 10
+}
+
+prototype(Nebelfitz.MathTraining:Content.ArithemticalTasks) < prototype(Neos.Neos:ContentComponent) {
+
+    tasks = Nebelfitz.MathTraining:ArtithmeticTaskGenerator {
+        number = ${q(node).property('rows') * q(node).property('columns')}
+        maximalOperand = ${q(node).property('maximalOperand')}
+        additionalFactors = ${q(node).property('additionalFactors')}
+        elementaryArithmeticTypes = ${q(node).property('elementaryArithmeticTypes')}
+    }
+
+    style = ${'
+        .mathTasks {
+            font-size: 1.3em;
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: repeat(' + q(node).property('rows') + ', 1fr);
+        }
+        .mathTask {
+            border-bottom: 1px solid black;
+        }
+    '}
+
+    renderer = afx`
+        <div>
+            <div class="mathTasks">
+                <Neos.Fusion:Loop items={props.tasks} itemName="task" iteration>
+                 <div class="mathTask">
+                     {task.withoutResult}
+                 </div>
+                </Neos.Fusion:Loop>
+            </div>
+            <style>
+                {props.style}
+            </style>
+        </div>
+    `
+
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+        }
+    }
+}

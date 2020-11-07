@@ -1,0 +1,18 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "nebelfitz/mathtraining",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nebelfitz\\MathTraining\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Nebelfitz.MathTraining"
+        }
+    }
+}

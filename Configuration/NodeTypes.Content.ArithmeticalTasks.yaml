@@ -1,0 +1,149 @@
+Nebelfitz.MathTraining:Content.ArithemticalTasks:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: Rechenaufgaben
+    icon: calculator
+    inspector:
+      groups:
+        math:
+          tab: default
+          label: 'Math'
+          icon: calculator
+  properties:
+
+    rows:
+      type: int
+      default: 3
+      ui:
+        label: "rows"
+        reloadIfChanged: true
+        inspector:
+          group: math
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            allowEmpty: false
+            multiple: false
+            values:
+              1:
+                label: "1"
+              2:
+                label: "2"
+              3:
+                label: "3"
+              4:
+                label: "4"
+              5:
+                label: "5"
+
+    columns:
+      type: int
+      default: 3
+      ui:
+        label: "colums"
+        reloadIfChanged: true
+        inspector:
+          group: math
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            allowEmpty: false
+            multiple: false
+            values:
+              1:
+                label: "1"
+              2:
+                label: "2"
+              3:
+                label: "3"
+              4:
+                label: "4"
+              5:
+                label: "5"
+              6:
+                label: "6"
+              7:
+                label: "7"
+              8:
+                label: "8"
+              9:
+                label: "9"
+              10:
+                label: "10"
+              15:
+                label: "15"
+              20:
+                label: "20"
+
+    maximalOperand:
+      type: int
+      default: 10
+      ui:
+        label: "Zahlenbereich"
+        reloadIfChanged: true
+        inspector:
+          group: math
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            allowEmpty: false
+            multiple: false
+            values:
+              10:
+                label: "1-10"
+              20:
+                label: "1-20"
+              100:
+                label: "1-100"
+
+    additionalFactors:
+      type: array
+      default: [1]
+      ui:
+        label: "Extra nullen"
+        reloadIfChanged: true
+        inspector:
+          group: math
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            allowEmpty: false
+            multiple: true
+            values:
+              1:
+                label: "0"
+              10:
+                label: "-"
+              100:
+                label: "2 | x 10"
+              1000:
+                label: "3 | x 100"
+              10000:
+                label: "4 | x 10.000"
+              100000:
+                label: "5 | x 100.000"
+              1000000:
+                label: "6 | x 1.000.000"
+
+    elementaryArithmeticTypes:
+      type: array
+      default: ['addition']
+      ui:
+        label: "elementary Arithmetic"
+        reloadIfChanged: true
+        inspector:
+          group: math
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            allowEmpty: false
+            multiple: true
+            values:
+              addition:
+                label: 'addition'
+                icon: 'plus'
+              subtraction:
+                label: 'subtraction'
+                icon: 'minus'
+              multiplication:
+                label: 'multiplication'
+                icon: 'times'
+              division:
+                label: 'division'
+                icon: 'divide'
