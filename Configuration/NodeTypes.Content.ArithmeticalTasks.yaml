@@ -69,8 +69,24 @@ Nebelfitz.MathTraining:Content.ArithemticalTasks:
                 label: "9"
               10:
                 label: "10"
+              11:
+                label: "11"
+              12:
+                label: "12"
+              13:
+                label: "13"
+              14:
+                label: "14"
               15:
                 label: "15"
+              16:
+                label: "16"
+              17:
+                label: "17"
+              18:
+                label: "18"
+              19:
+                label: "19"
               20:
                 label: "20"
 
@@ -110,15 +126,15 @@ Nebelfitz.MathTraining:Content.ArithemticalTasks:
               1:
                 label: "0"
               10:
-                label: "-"
+                label: "1 | x 10"
               100:
-                label: "2 | x 10"
+                label: "2 | x 100"
               1000:
-                label: "3 | x 100"
+                label: "3 | x 1.000"
               10000:
-                label: "4 | x 10.000"
+                label: "4 | x 10.0000"
               100000:
-                label: "5 | x 100.000"
+                label: "5 | x 100.0000"
               1000000:
                 label: "6 | x 1.000.000"
 
