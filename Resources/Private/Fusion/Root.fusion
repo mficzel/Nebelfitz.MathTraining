@@ -7,6 +7,9 @@ prototype(Nebelfitz.MathTraining:ArtithmeticTaskGenerator) {
 
 prototype(Nebelfitz.MathTraining:Content.ArithemticalTasks) < prototype(Neos.Neos:ContentComponent) {
 
+    showTasks = ${q(node).property('showTasks')}
+    showResults = ${q(node).property('showResults')}
+
     tasks = Nebelfitz.MathTraining:ArtithmeticTaskGenerator {
         number = ${q(node).property('rows') * q(node).property('columns')}
         maximalOperand = ${q(node).property('maximalOperand')}
@@ -24,20 +27,35 @@ prototype(Nebelfitz.MathTraining:Content.ArithemticalTasks) < prototype(Neos.Neo
         .mathTask {
             border-bottom: 1px solid black;
         }
+        .mathTaskDivider {
+            margin: 5em; 0;
+        }
     '}
 
     renderer = afx`
         <div>
-            <div class="mathTasks">
+            <style>
+                {props.style}
+            </style>
+
+            <div class="mathTasks" @if.showTasks={props.showTasks}>
                 <Neos.Fusion:Loop items={props.tasks} itemName="task" iteration>
                  <div class="mathTask">
                      {task.withoutResult}
                  </div>
                 </Neos.Fusion:Loop>
             </div>
-            <style>
-                {props.style}
-            </style>
+
+            <hr class="mathTaskDivider" @if.showBoth={props.showTasks && props.showResults}/>
+
+            <div class="mathTasks" @if.showResults={props.showResults}>
+                <Neos.Fusion:Loop items={props.tasks} itemName="task" iteration>
+                    <div class="mathTask">
+                        {task}
+                    </div>
+                </Neos.Fusion:Loop>
+            </div>
+
         </div>
     `
 

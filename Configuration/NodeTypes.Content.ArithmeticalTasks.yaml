@@ -163,3 +163,21 @@ Nebelfitz.MathTraining:Content.ArithemticalTasks:
               division:
                 label: 'division'
                 icon: 'divide'
+
+    showTasks:
+      type: boolean
+      default: true
+      ui:
+        label: "show Tasks"
+        reloadIfChanged: true
+        inspector:
+          group: math
+
+    showResults:
+      type: boolean
+      default: false
+      ui:
+        label: "show Results"
+        reloadIfChanged: true
+        inspector:
+          group: math

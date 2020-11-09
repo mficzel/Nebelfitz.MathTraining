@@ -30,12 +30,17 @@ class ElementaryMathematicTask
 
     public function getWithoutResult():string
     {
-        return $this->firstOperand . ' ' .$this->operation->symbol() . ' ' . $this->secondOperand . ' =';
+        return $this->formatNumber($this->firstOperand). ' ' .$this->operation->symbol() . ' ' . $this->formatNumber($this->secondOperand) . ' =';
     }
 
     public function __toString():string
     {
-        return $this->firstOperand . ' ' .$this->operation->symbol() . ' ' . $this->secondOperand . ' = ' . $this->operation->evaluate($this->firstOperand,  $this->secondOperand);
+        return $this->formatNumber($this->firstOperand) . ' ' .$this->operation->symbol() . ' ' . $this->formatNumber($this->secondOperand) . ' = ' . $this->formatNumber($this->operation->evaluate($this->firstOperand,  $this->secondOperand));
+    }
+
+    protected function formatNumber($number): string
+    {
+        return number_format($number, 0, ',', '.');
     }
 
 
