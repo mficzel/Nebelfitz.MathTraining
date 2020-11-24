@@ -163,7 +163,9 @@ Nebelfitz.MathTraining:Content.ArithemticalTasks:
               division:
                 label: 'division'
                 icon: 'divide'
-
+              divisionWithRemainder:
+                label: 'division mit rest'
+                icon: 'divide'
     showTasks:
       type: boolean
       default: true

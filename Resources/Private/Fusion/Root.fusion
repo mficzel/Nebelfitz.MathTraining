@@ -41,7 +41,7 @@ prototype(Nebelfitz.MathTraining:Content.ArithemticalTasks) < prototype(Neos.Neo
             <div class="mathTasks" @if.showTasks={props.showTasks}>
                 <Neos.Fusion:Loop items={props.tasks} itemName="task" iteration>
                  <div class="mathTask">
-                     {task.withoutResult}
+                     {task.formulaWithoutResult}
                  </div>
                 </Neos.Fusion:Loop>
             </div>
@@ -51,7 +51,7 @@ prototype(Nebelfitz.MathTraining:Content.ArithemticalTasks) < prototype(Neos.Neo
             <div class="mathTasks" @if.showResults={props.showResults}>
                 <Neos.Fusion:Loop items={props.tasks} itemName="task" iteration>
                     <div class="mathTask">
-                        {task}
+                        {task.formulaWithResult}
                     </div>
                 </Neos.Fusion:Loop>
             </div>

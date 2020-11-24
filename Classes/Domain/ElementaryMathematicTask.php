@@ -2,46 +2,59 @@
 
 namespace Nebelfitz\MathTraining\Domain;
 
-class ElementaryMathematicTask
-{
-    const ADDITION = 0;
-    const SUBTRACTION = 0;
-    const MULTIPICATION = 0;
-    const DIVISION = 0;
+use phpDocumentor\Reflection\DocBlockFactoryInterface;
 
+abstract class ElementaryMathematicTask
+{
     protected $firstOperand;
 
     protected $secondOperand;
-
-    protected $operation;
 
     /**
      * ElementaryMathematicTask constructor.
      * @param int $firstOperand
      * @param int $secondOperand
-     * @param MathematicOperation $operation
      */
-    public function __construct(int $firstOperand, int $secondOperand, MathematicOperation $operation)
+    public function __construct(int $seed1, int $seed2)
     {
-        $this->firstOperand = $firstOperand;
-        $this->secondOperand = $secondOperand;
-        $this->operation = $operation;
+        $this->firstOperand = $seed1;
+        $this->secondOperand = $seed2;
     }
 
-    public function getWithoutResult():string
+    abstract public function getSymbol(): string;
+
+    abstract public function getResult(): float;
+
+    public function getFirstOperand(): int
     {
-        return $this->formatNumber($this->firstOperand). ' ' .$this->operation->symbol() . ' ' . $this->formatNumber($this->secondOperand) . ' =';
+        return $this->firstOperand;
+    }
+
+    public function getSecondOperand(): int
+    {
+        return $this->secondOperand;
+    }
+
+
+
+    public function getFormulaWithoutResult():string
+    {
+        return $this->formatNumber($this->getFirstOperand()) . ' ' . $this->getSymbol() . ' ' . $this->formatNumber($this->getSecondOperand()) . ' =';
+    }
+
+    public function getFormulaWithResult():string
+    {
+        return $this->getFormulaWithoutResult() . ' ' .  $this->formatNumber($this->getResult());
     }
 
     public function __toString():string
     {
-        return $this->formatNumber($this->firstOperand) . ' ' .$this->operation->symbol() . ' ' . $this->formatNumber($this->secondOperand) . ' = ' . $this->formatNumber($this->operation->evaluate($this->firstOperand,  $this->secondOperand));
+        return $this->getFormulaWithResult();
     }
 
     protected function formatNumber($number): string
     {
         return number_format($number, 0, ',', '.');
     }
-
 
 }

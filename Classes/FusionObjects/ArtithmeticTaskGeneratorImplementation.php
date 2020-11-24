@@ -1,11 +1,11 @@
 <?php
 namespace Nebelfitz\MathTraining\FusionObjects;
 
-use Nebelfitz\MathTraining\Domain\AdditionOperation;
-use Nebelfitz\MathTraining\Domain\DivisionOperation;
-use Nebelfitz\MathTraining\Domain\ElementaryMathematicTask;
-use Nebelfitz\MathTraining\Domain\MultiplicationOperation;
-use Nebelfitz\MathTraining\Domain\SubstractionOperation;
+use Nebelfitz\MathTraining\Domain\AdditionTask;
+use Nebelfitz\MathTraining\Domain\DivisionTask;
+use Nebelfitz\MathTraining\Domain\DivisionWithRemainderTask;
+use Nebelfitz\MathTraining\Domain\MultiplicationTask;
+use Nebelfitz\MathTraining\Domain\SubstractionTask;
 use Neos\Fusion\FusionObjects\AbstractFusionObject;
 
 class ArtithmeticTaskGeneratorImplementation extends AbstractFusionObject
@@ -20,9 +20,10 @@ class ArtithmeticTaskGeneratorImplementation extends AbstractFusionObject
 
         $result = [];
         while (count($result) < $number) {
-            $firstOperand = random_int(1, $maximalOperand);
-            $secondOperand = random_int(1, $maximalOperand);
-            $hash = $firstOperand . ':' . $secondOperand;
+            $seed1 = random_int(1, $maximalOperand);
+            $seed2 = random_int(1, $maximalOperand);
+
+            $hash = $seed1 . ':' . $seed2;
             if (array_key_exists($hash, $result)) {
                 continue;
             }
@@ -30,43 +31,38 @@ class ArtithmeticTaskGeneratorImplementation extends AbstractFusionObject
             $factorPos1 = random_int(0, count($additionalFactors) -1 );
             $factor1 = (int)$additionalFactors[$factorPos1];
             if ($factor1 <> 1) {
-                $firstOperand *= $factor1;
+                $seed1 *= $factor1;
             }
 
             $factorPos2 = random_int(0, count($additionalFactors) -1 );
             $factor2 = (int)$additionalFactors[$factorPos2];
             if ($factor2 <> 1) {
-                $secondOperand *= $factor2;
+                $seed2 *= $factor2;
             }
 
             $typePos = random_int(0, count($elementaryArithmeticTypes) -1 );
             $type = $elementaryArithmeticTypes[$typePos];
             switch ($type) {
                 case 'addition':
-                    $operation = new AdditionOperation();
+                    $task = new AdditionTask($seed1, $seed2);
                     break;
                 case 'subtraction':
-                    $operation = new SubstractionOperation();
-                    $firstOperand = $secondOperand + $firstOperand;
+                    $task = new SubstractionTask($seed1, $seed2);
                     break;
                 case 'multiplication':
-                    $operation = new MultiplicationOperation();
+                    $task = new MultiplicationTask($seed1, $seed2);
                     break;
                 case 'division':
-                    $operation = new DivisionOperation();
-                    $firstOperand = $secondOperand * $firstOperand;
+                    $task = new DivisionTask($seed1, $seed2);
+                    break;
+                case 'divisionWithRemainder':
+                    $task = new DivisionWithRemainderTask($seed1, $seed2);
                     break;
                 default:
-                    $operation = null;
+                    $task = null;
             }
 
-
-
-
-            if ($operation) {
-                $task = new ElementaryMathematicTask($firstOperand, $secondOperand, $operation);
-                $result[$hash] = $task;
-            }
+            $result[$hash] = $task;
         }
 
         return $result;
